@@ -1,0 +1,23 @@
+#!/usr/bin/python
+
+import os
+import subprocess
+import sys
+
+path = '.'
+destination = '.'
+extension = '.rar'
+
+if len(sys.argv) > 1:
+	path = sys.argv[1]
+
+if len(sys.argv) > 2:
+	destination = sys.argv[2]
+
+if len(sys.argv) > 3:
+	extension = sys.argv[3]
+
+for folder in os.walk(path):
+	for file in folder[2]:
+		if file[-len(extension):] == extension:
+			subprocess.call(['unrar', 'x', '%s/%s' % (folder[0], file), destination])
